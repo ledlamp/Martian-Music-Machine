@@ -1,0 +1,13 @@
+midi/*
+!midi/.gitkeep
+music/*
+!music/.gitkeep
+music_metadata/*
+!music_metadata/.gitkeep
+node_modules
+soundfonts/*
+!soundfonts/.gitkeep
+trash/*
+!trash/.gitkeep
+token.txt
+ytplay-history.txt

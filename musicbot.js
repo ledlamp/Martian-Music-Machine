@@ -153,10 +153,10 @@ const commands = {
 				else if (midis.includes(query)) play(query, 'midi', message.channel);
 				else {
 					let music_search = music.search(query);
-					if (music_search) play(music_search.random(), 'audio', message.channel);
+					if (music_search.length > 0) play(music_search.random(), 'audio', message.channel);
 					else {
 						let midi_search = midis.search(query);
-						if (midi_search) play(midi_search.random(), 'midi', message.channel);
+						if (midi_search.length > 0) play(midi_search.random(), 'midi', message.channel);
 						else {
 							message.channel.send('⚠ **Nothing was found.** Try narrowing your keyword or use a different command (use `!help` for command list)');
 						}
@@ -177,7 +177,7 @@ const commands = {
 				if (fs.existsSync('./music/'+query)) play(query, 'audio', message.channel);
 				else {
 					let search = music.search(query);
-					if (search) play(search.random(), 'audio', message.channel);
+					if (search.length > 0) play(search.random(), 'audio', message.channel);
 					else play(music.random(), 'audio', message.channel);
 				}
 			} else play(music.random(), 'audio', message.channel);
@@ -192,7 +192,7 @@ const commands = {
 				if (fs.existsSync('./midi/'+query)) play(query, 'midi', message.channel);
 				else {
 					let search = midis.search(query);
-					if (search != "") play(search.random(), 'midi', message.channel);
+					if (search.length > 0) play(search.random(), 'midi', message.channel);
 					else play(midis.random(), 'midi', message.channel);
 				}
 			} else play(midis.random(), 'midi', message.channel);
@@ -206,7 +206,7 @@ const commands = {
 				let music_search = music.search(txt(1));
 				let midi_search = midis.search(txt(1));
 				if (music_search != "" || midi_search != "") {
-					if (music_search != "" && music_search.length < 100) {
+					if (music_search != ""  && music_search.length < 100) {
 						let sr = "💿 **Audio Search results:**\n";
 						music_search.forEach((item, index, array) => {
 							sr += '`'+item+'`\n';

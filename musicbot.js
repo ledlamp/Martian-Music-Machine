@@ -37,7 +37,7 @@ function play(filename, type, channel) {
 			const path = './music/'+filtered_filename;
 			const metadata_path = './music_metadata/'+filtered_filename+'.json';
 
-			connection.playFile(path);
+			connection.playFile(path, {bitrate:"auto"});
 			connection.dispatcher.songname = filename;
 
 			let np_message;
@@ -78,7 +78,7 @@ function play(filename, type, channel) {
 			timidity.stderr.on('data', data => {
 				console.log(("[TiMidity] "+data.toString()).yellow);
 			});
-			connection.playConvertedStream(timidity.stdout);
+			connection.playConvertedStream(timidity.stdout, {bitrate:"auto"});
 			connection.dispatcher.songname = filename;
 			if (channel) channel.send('🎶 **Now playing:** `'+filename+'` 🎹');
 			client.user.setGame(filename);
@@ -92,7 +92,7 @@ function play(filename, type, channel) {
 			const dl = youtubedl(filename, ['-f bestaudio'], {maxBuffer: Infinity});
 			let video_filename;
 			dl.on('info', function(info) {
-				connection.playStream(dl);
+				connection.playStream(dl, {bitrate:"auto"});
 				if (channel) channel.send('🎶 **Now playing:** `'+info.title+'` 📺');
 				fs.appendFileSync('./ytplay-history.txt', info._filename+'\n'); // ¯\_(ツ)_/¯
 				client.user.setGame(info.title);

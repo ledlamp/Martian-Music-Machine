@@ -110,7 +110,7 @@ function play(filename, type, channel) {
 
 
 const commands = {
-	mhelp: {
+	help: {
 		description: "Shows command list",
 		execute: function (message, args, txt) {
 			const embed = {
